@@ -32,11 +32,11 @@ def bSortList(value, sorted: list[int | float]) -> int:
 # print(curr)
 
 # print(mk_list(6))
-from timeit import timeit
+# from timeit import timeit
 
-size = 1000
-l = mk_list(size)
+# size = 1000
+# l = mk_list(size)
 
-print("timer:")
-t = timeit("bSearchList(7, l)", globals=locals())
-print(t)
+# print("timer:")
+# t = timeit("bSearchList(7, l)", globals=locals())
+# print(t)
