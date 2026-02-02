@@ -22,8 +22,8 @@ def bSearchList(value, sorted: list[int | float]) -> int:
         # not in list
         return -1
 
-def bSortList(value, sorted: list[int | float]) -> int:
-    pass
+# def bSortList(value, sorted: list[int | float]) -> int:
+#     pass
 
 
 # m = LinkedList(*mk_list(100))

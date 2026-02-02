@@ -5,7 +5,7 @@ def mk_list(*range_args):
 class NodeLL:
     def __init__(self, data):
         self.data = data
-        self.next = None
+        self.next: NodeLL | None = None
 
     def __repr__(self):
         return f"NodeLL({self.data},{ "" if self.next is None else " ..."})"
@@ -15,19 +15,19 @@ class LinkedList:
     head: NodeLL
 
     def __init__(self, *args):
-        _b = True
-        prev: NodeLL = None
-        for v in args:
-            if _b:
-                _b = False
-                prev = self.head = NodeLL(args[0])
-            else:
-                prev.next = NodeLL(v)
-                prev = prev.next
+        self.head = NodeLL(args[0])
+        curr: NodeLL = self.head
+        for _i, v in enumerate(args):
+            match _i:
+                case 0:
+                    pass
+                case _:
+                    curr.next = NodeLL(v)
+                    curr = curr.next
 
     def forEach(self, fn):
-        curr: NodeLL = self.head
-        while curr:
+        curr: NodeLL | None = self.head
+        while curr is not None:
             fn(curr)
             curr = curr.next
 
@@ -36,8 +36,8 @@ class LinkedList:
 
     def __repr__(self):
         s = "LinkedList["
-        curr: NodeLL = self.head
-        while curr:
+        curr: NodeLL | None = self.head
+        while curr is not None:
             s += repr(curr.data) + ", "
             curr = curr.next
         s = s.strip(", ")
