@@ -1,5 +1,9 @@
+from linkedlist import *
 from shared import *
-from math import ceil, floor
+
+
+def mk_list(*range_args) -> list[Number]:
+    return list(range(*range_args))
 
 
 def bSearchList(value, sorted: list[int | float]) -> int:
@@ -22,37 +26,42 @@ def bSearchList(value, sorted: list[int | float]) -> int:
         return -1
 
 
-def bSearchLL(search_value: Number, head: NodeLL, n: int) -> NodeLL | None:
+def bSearchLL(search_value: Number, head: NodeLL, n: int) -> NodeLL | int:
     # """returns the refrence of the `NodeLL` where `search_value` sould be inserted,
     # returning None if it should be `push_front`'d"""
     # if n is None:
     #     n = len(sorted)
     # curr = sorted.head
 
-    if n <= 2:
+    if n == 1:
         if search_value < head.value:
-            return None
+            return -1
         else:
             return head
+    if n == 2:
+        if search_value < head.value:
+            return head
+        else:
+            return -1
 
-    n_half = n // 2
+    n_half = ceil(n / 2)
 
-    mid_prev = LinkedList.advance(head, n_half)
+    mid = LinkedList.advance(head, n_half)
 
-    assert mid_prev.next != None
+    assert mid != None
 
     # ins_v = LinkedList.pop_next(mid_prev)
-    if search_value == mid_prev.value:
-        return mid_prev
-    elif search_value < mid_prev.value:
-        return bSearchLL(search_value, head, n - n_half)
-    elif search_value > mid_prev.value:
-        return bSearchLL(search_value, mid_prev, n - n_half)
+    if search_value == mid.value:
+        return mid
+    elif search_value < mid.value:
+        return bSearchLL(search_value, head, n_half)
+    elif search_value > mid.value:
+        return bSearchLL(search_value, mid, n_half)
 
 
-def bSortLL(lst: LinkedList):
-    prev = lst.head
-    # for i in range(len(lst)):
+# def bSortLL(lst: LinkedList):
+#     prev = lst.head
+#     # for i in range(len(lst)):
 
 
 from random import shuffle
@@ -70,18 +79,22 @@ if __name__ == "__main__":
     print(len(ll), ll)
 
     # # print(LinkedList.advance())
-    for i in range(0, 50, 2):
-        _t = bSearchLL(i, ll.head, n)
-        assert _t is not None
-        # print(_t)
-        if i > _t.next.value:
-            print(
-                _t.value,
-                i,
-                _t.next.value,
-                # _t.value <= i,
-                # _t.value <= i,
-            )
+    # for i in range(-5, 50, 2):
+    #     _t = bSearchLL(i, ll.head, n - 1)
+    #     # assert _t is not None
+    #     if not isinstance(_t, NodeLL):
+    #         print("_t:",_t, i)
+    #     else:
+    #         # print(_t)
+    #         # if i > _t.next.value:
+    #         print(
+    #             _t.value,
+    #             i,
+    #             # _t.value <= i,
+    #             # _t.value <= i,
+    #             end=" ",
+    #         )
+    #         print(_t.next.value if _t.next is not None else "")
         # print()
     # shuffle(lst)
     # print("len(lst)=", len(lst))

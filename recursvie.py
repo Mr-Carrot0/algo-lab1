@@ -1,4 +1,4 @@
-from shared import *
+from linkedlist import *
 from math import ceil
 
 
